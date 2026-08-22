@@ -4,10 +4,20 @@
         <div>
             <ul>
                 {% for item in all_items %}
-                    <li>
-                        <a href="{% url "base:detail" item.id %}">{{ item.item_name }}</a>
-                        <p>Price: {{ item.item_price }}</p>
-                        <p>Description: {{ item.item_description }}</p>
+                    <li class="m-10 flex w-1/2 mx-auto">
+                        <div>
+                            <img class="h-32 rounded-lg"
+                                 src="{{ item.item_image }}"
+                                 alt="{{ item.item_name }}">
+                        </div>
+                        <div class="mx-16">
+                            <p class="font-bold">{{ item.item_name }}</p>
+                            <p class="text-green-500 font-bold">Price: ${{ item.item_price }}</p>
+                            <p>Description: {{ item.item_description }}</p>
+                            <a href="{% url "base:detail" item.id %}">
+                                <div class="bg-red-400 text-white font-bold px-4 py-2 rounded-md mt-2 text-center">View Details</div>
+                            </a>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
