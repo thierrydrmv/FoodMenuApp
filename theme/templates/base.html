@@ -1,0 +1,19 @@
+{% load static tailwind_tags %}
+{% tailwind_css %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Django Tailwind</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description"
+              content="Create, manage, and access digital menus easily.">
+        {% tailwind_css %}
+    </head>
+    <body class="bg-gray-50 text-black font-serif leading-normal tracking-normal">
+        <div class="container mx-auto">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
