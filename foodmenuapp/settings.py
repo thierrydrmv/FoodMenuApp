@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "base",
     "tailwind",
     "theme",
+    "users",
 ]
 
 TAILWIND_APP_NAME = "theme"
@@ -129,3 +130,5 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
+
+LOGIN_REDIRECT_URL = "base:home"
