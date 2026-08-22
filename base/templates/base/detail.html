@@ -10,8 +10,9 @@
             <p>{{ item.item_description }}</p>
             <div class="m-3">
                 <a class="bg-yellow-600 px-4 py-2 rounded-md font-bold text-white"
-                   href="">Edit</a>
-                <a class="bg-red-600 px-4 py-2 rounded-md font-bold text-white" href="">Delete</a>
+                   href="{% url "base:update_item" item.id %}">Edit</a>
+                <a class="bg-red-600 px-4 py-2 rounded-md font-bold text-white"
+                   href="{% url "base:delete_item" item.id %}">Delete</a>
             </div>
         </div>
     </div>
