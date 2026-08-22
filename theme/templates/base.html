@@ -12,6 +12,11 @@
     </head>
     <body class="bg-gray-50 text-black font-serif leading-normal tracking-normal">
         {% include "navbar.html" %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="bg-green-400 text-green-800">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         {% block content %}{% endblock %}
     </body>
 </html>
