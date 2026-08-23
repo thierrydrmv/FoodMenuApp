@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -13,3 +14,6 @@ class Item(models.Model):
         max_length=500,
         default="https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
     )
+
+    def get_absolute_url(self):
+        return reverse("base:home")
