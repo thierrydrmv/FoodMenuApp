@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -13,6 +14,12 @@ class Item(models.Model):
     item_image = models.CharField(
         max_length=500,
         default="https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+    )
+
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        default=1,
     )
 
     def get_absolute_url(self):

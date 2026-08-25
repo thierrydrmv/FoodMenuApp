@@ -54,6 +54,10 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     template_name = "base/item_form.html"
     login_url = "users/login"
 
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
 
 # @login_required
 # def updateItem(request, pk):
