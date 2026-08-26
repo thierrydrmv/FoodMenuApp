@@ -76,6 +76,9 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "base/item_form.html"
     login_url = "users/login"
 
+    def get_queryset(self):
+        return Item.objects.filter(creator=self.request.user)
+
 
 # @login_required
 # def deleteItem(request, pk):

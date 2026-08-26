@@ -1,8 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">SignUp</button>
-    </form>
+    <div class="flex flex-column justify-center items-center min-h-screen p-10">
+        <form action="" method="post" class="shadow-lg space-y-6 p-10 w-96">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="">{{ field.label }}</label>
+                    <div class="border rounded p-2">{{ field }}</div>
+                </div>
+                {% for error in field.errors %}
+                    <p class="bg-red-500 text-white p-2">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+            <button class="bg-blue-400 px-2 py-2 w-full text-white rounded" type="submit">SignUp</button>
+        </form>
+    </div>
 {% endblock content %}

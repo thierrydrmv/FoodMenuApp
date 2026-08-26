@@ -8,12 +8,14 @@
             <p class="font-bold text-4xl">{{ item.item_name }}</p>
             <p class="text-green-500 font-bold text-2xl">Price: ${{ item.item_price }}</p>
             <p>{{ item.item_description }}</p>
-            <div class="m-3">
-                <a class="bg-yellow-600 px-4 py-2 rounded-md font-bold text-white"
-                   href="{% url "base:update_item" item.id %}">Edit</a>
-                <a class="bg-red-600 px-4 py-2 rounded-md font-bold text-white"
-                   href="{% url "base:delete_item" item.id %}">Delete</a>
-            </div>
+            {% if item.creator == request.user %}
+                <div class="m-3">
+                    <a class="bg-yellow-600 px-4 py-2 rounded-md font-bold text-white"
+                       href="{% url "base:update_item" item.id %}">Edit</a>
+                    <a class="bg-red-600 px-4 py-2 rounded-md font-bold text-white"
+                       href="{% url "base:delete_item" item.id %}">Delete</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock content %}

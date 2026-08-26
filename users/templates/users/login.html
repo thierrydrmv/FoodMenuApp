@@ -1,8 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="flex flex-col justify-center items-center min-h-screen p-10">
+        <h1>Login</h1>
+        <form action="" method="post" class="shadow-lg p-10 space-y-10">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="bg-red-500 text-white p-2">
+                    {% for error in form.non_field_errors %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div>
+                <label for="">Username</label>
+                <div class="border round p-1">{{ form.username }}</div>
+            </div>
+            <div>
+                <label for="">Password</label>
+                <div class="border round p-1">{{ form.password }}</div>
+            </div>
+            <button class="bg-blue-400 px-2 py-2 w-full text-white rounded" type="submit">Login</button>
+        </form>
+    </div>
 {% endblock content %}
