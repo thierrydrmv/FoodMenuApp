@@ -5,9 +5,14 @@ from django.urls import reverse
 
 # Create your models here.
 class Item(models.Model):
-    item_name = models.CharField(max_length=200)
+    class Meta:
+        indexes = [
+            models.Index(fields=("item_name", "item_description")),
+        ]
+
+    item_name = models.CharField(max_length=200, db_index=True)
     item_description = models.CharField()
-    item_price = models.DecimalField(max_digits=6, decimal_places=2)
+    item_price = models.DecimalField(max_digits=6, decimal_places=2, db_index=True)
     item_image = models.URLField(
         max_length=500,
         default="https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
