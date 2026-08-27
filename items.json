@@ -1,0 +1,288 @@
+[
+{
+    "model": "base.item",
+    "pk": 1,
+    "fields": {
+        "item_name": "Pepperoni Pizza",
+        "item_description": "Spicy",
+        "item_price": "12.00",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T21:44:44.586Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 2,
+    "fields": {
+        "item_name": "Margherita Pizza",
+        "item_description": "Classic Italian pizza with mozzarella and tomato",
+        "item_price": "8.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:06:29.505Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 17,
+    "fields": {
+        "item_name": "French Fries",
+        "item_description": "Crispy golden potato fries with salt",
+        "item_price": "3.49",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:07:45.592Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 18,
+    "fields": {
+        "item_name": "Cheeseburger",
+        "item_description": "Beef patty with cheese, lettuce and tomato",
+        "item_price": "6.49",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:07:54.477Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 26,
+    "fields": {
+        "item_name": "Veggie Burger",
+        "item_description": "Plant-based patty with lettuce and tomato",
+        "item_price": "6.29",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:10.382Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 27,
+    "fields": {
+        "item_name": "Caesar Salad",
+        "item_description": "Crisp romaine with parmesan and croutons",
+        "item_price": "5.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:27.521Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 28,
+    "fields": {
+        "item_name": "Chicken Tacos",
+        "item_description": "Soft tortillas with grilled chicken and salsa",
+        "item_price": "7.29",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:30.435Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 29,
+    "fields": {
+        "item_name": "Sushi Platter",
+        "item_description": "Assorted rolls with tuna, salmon and avocado",
+        "item_price": "12.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:33.543Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 30,
+    "fields": {
+        "item_name": "Pasta Alfredo",
+        "item_description": "Creamy white sauce pasta with mushrooms",
+        "item_price": "9.49",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:36.046Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 31,
+    "fields": {
+        "item_name": "Falafel Wrap",
+        "item_description": "Middle Eastern wrap with chickpea patties",
+        "item_price": "6.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:39.010Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 32,
+    "fields": {
+        "item_name": "Pad Thai",
+        "item_description": "Thai stir-fried noodles with peanuts and veggies",
+        "item_price": "10.49",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:41.577Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 33,
+    "fields": {
+        "item_name": "French Fries",
+        "item_description": "Crispy golden potato fries with salt",
+        "item_price": "3.49",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:43.731Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 35,
+    "fields": {
+        "item_name": "Butter Chicken",
+        "item_description": "Indian-style chicken in creamy tomato sauce",
+        "item_price": "11.49",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:49.451Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 36,
+    "fields": {
+        "item_name": "Ramen Bowl",
+        "item_description": "Japanese noodle soup with egg and pork",
+        "item_price": "10.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:51.756Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 37,
+    "fields": {
+        "item_name": "Greek Salad",
+        "item_description": "Feta cheese, olives, cucumber and tomatoes",
+        "item_price": "7.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:08:54.317Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 38,
+    "fields": {
+        "item_name": "BBQ Ribs",
+        "item_description": "Slow cooked pork ribs with barbecue sauce",
+        "item_price": "14.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:09:03.660Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 39,
+    "fields": {
+        "item_name": "Pancakes",
+        "item_description": "Stack of fluffy pancakes with maple syrup",
+        "item_price": "5.79",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:09:06.639Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 40,
+    "fields": {
+        "item_name": "Shawarma",
+        "item_description": "Grilled meat wrap with garlic sauce",
+        "item_price": "8.49",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:09:08.972Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 41,
+    "fields": {
+        "item_name": "Mutton Biryani",
+        "item_description": "Fragrant rice with spiced mutton",
+        "item_price": "12.29",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:09:11.860Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 42,
+    "fields": {
+        "item_name": "Spring Rolls",
+        "item_description": "Crispy rolls stuffed with vegetables",
+        "item_price": "4.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:09:19.979Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 43,
+    "fields": {
+        "item_name": "Fish and Chips",
+        "item_description": "British-style fried fish with fries",
+        "item_price": "9.99",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:09:22.281Z",
+        "creator": 1
+    }
+},
+{
+    "model": "base.item",
+    "pk": 44,
+    "fields": {
+        "item_name": "Ice Cream Sundae",
+        "item_description": "Vanilla ice cream topped with chocolate sauce",
+        "item_price": "4.59",
+        "item_image": "https://www.runawayapricot.com/wp-content/uploads/2014/09/placeholder.jpg",
+        "is_available": true,
+        "created_at": "2026-08-26T22:09:25.310Z",
+        "creator": 1
+    }
+}
+]

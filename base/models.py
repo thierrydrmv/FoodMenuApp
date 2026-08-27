@@ -18,14 +18,14 @@ class Item(models.Model):
     creator = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        default=1,
+        default=1,  # type: ignore
     )
 
     def get_absolute_url(self):
         return reverse("base:home")
 
     def __str__(self):
-        return self.item_name
+        return f"{self.item_name}, price: {self.item_price} "
 
 
 class Category(models.Model):
