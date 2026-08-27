@@ -10,3 +10,9 @@ class ItemManager(models.Manager):
 
     def search(self, keyword):
         return self.filter(item_name__icontains=keyword)
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=False)
+
+    def deleted(self):
+        return super().get_queryset().filter(is_deleted=True)

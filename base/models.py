@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 from .managers import ItemManager
 
@@ -21,6 +22,8 @@ class Item(models.Model):
     )
     is_available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_deleted = models.BooleanField(default=False)  # soft delete flag
+    deleted_at = models.DateTimeField(null=True, blank=True)
     objects = ItemManager()
 
     creator = models.ForeignKey(
@@ -29,11 +32,16 @@ class Item(models.Model):
         default=1,  # type: ignore
     )
 
+    def __str__(self):
+        return f"{self.item_name}, price: {self.item_price} "
+
     def get_absolute_url(self):
         return reverse("base:home")
 
-    def __str__(self):
-        return f"{self.item_name}, price: {self.item_price} "
+    def soft_delete(self, using=None, keep_parents=True):
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.save(update_fields=["is_deleted", "deleted_at"])
 
 
 class Category(models.Model):

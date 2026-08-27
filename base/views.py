@@ -1,26 +1,27 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView
 
 # Create your views here.
 from .models import Item
 
-# @login_required
-# def home(request):
-#     all_items = Item.objects.all()
-#     context = {"all_items": all_items}
-#     return render(request, "base/home.html", context)
+
+@login_required
+def home(request):
+    all_items = Item.objects.all()
+    context = {"all_items": all_items}
+    return render(request, "base/home.html", context)
 
 
 # class base view is a easier and faster way to create generic views without
 # additional logic.
-class HomeClassView(LoginRequiredMixin, ListView):
-    model = Item
-    template_name = "base/home.html"
-    context_object_name = "all_items"
-    login_url = "users/login"
+# class HomeClassView(LoginRequiredMixin, ListView):
+#     model = Item
+#     template_name = "base/home.html"
+#     context_object_name = "all_items"
+#     login_url = "users/login"
 
 
 # @login_required
@@ -80,17 +81,17 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         return Item.objects.filter(creator=self.request.user)
 
 
-# @login_required
-# def deleteItem(request, pk):
-#     item = get_object_or_404(Item, id=pk)
-#     if request.method == "POST":
-#         item.delete()
-#         return redirect("base:home")
-#     return render(request, "base/item_delete.html")
+@login_required
+def deleteItem(request, pk):
+    item = get_object_or_404(Item, id=pk)
+    if request.method == "POST":
+        item.soft_delete()
+        return redirect("base:home")
+    return render(request, "base/item_delete.html")
 
 
-class ItemDeleteView(LoginRequiredMixin, DeleteView):
-    model = Item
-    template_name = "base/item_delete.html"
-    login_url = "users/login"
-    success_url = reverse_lazy("base:home")
+# class ItemDeleteView(LoginRequiredMixin, DeleteView):
+#     model = Item
+#     template_name = "base/item_delete.html"
+#     login_url = "users/login"
+#     success_url = reverse_lazy("base:home")
