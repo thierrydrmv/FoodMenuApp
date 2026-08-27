@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -9,7 +11,7 @@ from .managers import ItemManager
 # Create your models here.
 class Item(models.Model):
     class Meta:
-        indexes = [
+        indexes: ClassVar[list[models.Index]] = [
             models.Index(fields=("item_name", "item_description")),
         ]
 
