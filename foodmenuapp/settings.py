@@ -49,6 +49,9 @@ INSTALLED_APPS = [
 TAILWIND_APP_NAME = "theme"
 
 MIDDLEWARE = [
+    "base.middlewares.LogRequestMiddleware",
+    "base.middlewares.TimerMiddleware",
+    "base.middlewares.BlockIPMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
