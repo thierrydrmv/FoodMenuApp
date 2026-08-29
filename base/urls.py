@@ -1,11 +1,13 @@
 from django.urls import path
 
+# from django.views.decorators.cache import cache_page  # url level
 from . import views
 
 # Create namespace, when indexing in .html files add base:{name}
 app_name = "base"
 urlpatterns = [
     # path("", views.HomeClassView.as_view(), name="home"),
+    # path("", cache_page(60 * 15)(views.home), name="home"),
     path("", views.home, name="home"),
     path("detail/<int:pk>", views.DetailClassView.as_view(), name="detail"),
     # path("detail/<int:pk>", views.detail, name="detail"),

@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+
+# from django.views.decorators.cache import cache_page
+# from django.views.decorators.vary import vary_on_headers
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -10,6 +13,8 @@ from .models import Item
 
 
 @login_required
+# @cache_page(60 * 15)  # 15 minutes view level
+# @vary_on_headers("User_Agent")  # cache at headers level, vary according to the user
 def home(request):
     all_items = Item.objects.all()
     paginator = Paginator(all_items, per_page=5)

@@ -1,24 +1,31 @@
 {% extends "base.html" %}
+{% load cache %}
 {% block content %}
     <body>
         <div>
             <ul>
+                {% comment %} fragment caching {% endcomment %}
                 {% for item in page_object %}
-                    <li class="m-10 flex w-1/2 mx-auto">
-                        <div>
-                            <img class="h-32 rounded-lg"
-                                 src="{{ item.item_image }}"
-                                 alt="{{ item.item_name }}">
-                        </div>
-                        <div class="mx-16">
-                            <p class="font-bold">{{ item.item_name }}</p>
-                            <p class="text-green-500 font-bold">Price: ${{ item.item_price }}</p>
-                            <p>Description: {{ item.item_description }}</p>
-                            <a href="{% url "base:detail" item.id %}">
-                                <div class="bg-red-400 text-white font-bold px-4 py-2 rounded-md mt-2 text-center">View Details</div>
-                            </a>
-                        </div>
-                    </li>
+                    {# Fragment caching does not add HTTP cache headers. #}
+                    {% cache 900 item item.id %}
+                        {% comment %} Use temporarily to test the cache: {% endcomment %}
+                        {% comment %} <p>Cache created at: {% now "H:i:s" %}</p> {% endcomment %}
+                        <li class="m-10 flex w-1/2 mx-auto">
+                            <div>
+                                <img class="h-32 rounded-lg"
+                                     src="{{ item.item_image }}"
+                                     alt="{{ item.item_name }}">
+                            </div>
+                            <div class="mx-16">
+                                <p class="font-bold">{{ item.item_name }}</p>
+                                <p class="text-green-500 font-bold">Price: ${{ item.item_price }}</p>
+                                <p>Description: {{ item.item_description }}</p>
+                                <a href="{% url "base:detail" item.id %}">
+                                    <div class="bg-red-400 text-white font-bold px-4 py-2 rounded-md mt-2 text-center">View Details</div>
+                                </a>
+                            </div>
+                        </li>
+                    {% endcache %}
                 {% endfor %}
             </ul>
         </div>
