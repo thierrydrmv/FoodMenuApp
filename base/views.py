@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -11,7 +12,10 @@ from .models import Item
 @login_required
 def home(request):
     all_items = Item.objects.all()
-    context = {"all_items": all_items}
+    paginator = Paginator(all_items, per_page=5)
+    page_number = request.GET.get("page")
+    page_object = paginator.get_page(page_number)
+    context = {"page_object": page_object}
     return render(request, "base/home.html", context)
 
 

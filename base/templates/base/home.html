@@ -3,7 +3,7 @@
     <body>
         <div>
             <ul>
-                {% for item in all_items %}
+                {% for item in page_object %}
                     <li class="m-10 flex w-1/2 mx-auto">
                         <div>
                             <img class="h-32 rounded-lg"
@@ -23,4 +23,15 @@
             </ul>
         </div>
     </body>
+    <div class="flex items-center justify-center space-x-4 py-4">
+        {% if page_object.has_previous %}
+            <a class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
+               href="?page={{ page_object.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}</span>
+        {% if page_object.has_next %}
+            <a class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
+               href="?page={{ page_object.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
 {% endblock content %}
