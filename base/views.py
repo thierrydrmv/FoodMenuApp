@@ -1,22 +1,32 @@
+import logging
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 
 # from django.views.decorators.cache import cache_page
 # from django.views.decorators.vary import vary_on_headers
-from django.views.generic.detail import DetailView
+# from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Create your views here.
 from .models import Item
+
+logger = logging.getLogger(__name__)
 
 
 @login_required
 # @cache_page(60 * 15)  # 15 minutes view level
 # @vary_on_headers("User_Agent")  # cache at headers level, vary according to the user
 def home(request):
+    logger.info("Fetching all items from the database")
+    logger.info(
+        f"[{timezone.now().isoformat()}] User {request.user} request item list from ip: {request.META.get('REMOTE_ADDR')}"
+    )
     all_items = Item.objects.all()
+    logger.debug(f"Found {all_items.count()} items.")
     paginator = Paginator(all_items, per_page=5)
     page_number = request.GET.get("page")
     page_object = paginator.get_page(page_number)
@@ -33,18 +43,20 @@ def home(request):
 #     login_url = "users/login"
 
 
-# @login_required
-# def detail(request, pk):
-#     item = get_object_or_404(Item, id=pk)
-#     context = {"item": item}
-#     return render(request, "base/detail.html", context)
+@login_required
+def detail(request, pk):
+    logger.info(f"Fetching a specific item in the database id: {pk}.")
+    item = get_object_or_404(Item, id=pk)
+    logger.debug(f"Found {item.item_name}, Price: ${item.item_price}")
+    context = {"item": item}
+    return render(request, "base/detail.html", context)
 
 
-class DetailClassView(LoginRequiredMixin, DetailView):
-    model = Item
-    template_name = "base/detail.html"
-    context_object_name = "item"
-    login_url = "users/login"
+# class DetailClassView(LoginRequiredMixin, DetailView):
+#     model = Item
+#     template_name = "base/detail.html"
+#     context_object_name = "item"
+#     login_url = "users/login"
 
 
 # @login_required
