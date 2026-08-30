@@ -5,7 +5,8 @@
             <img class="w-128 rounded-lg" src="{{ item.item_image }}" alt="">
         </div>
         <div class="m-10 space-y-5">
-            <p class="font-bold text-4xl">{{ item.item_name }}</p>
+            {% comment %} template filter example {% endcomment %}
+            <p class="font-bold text-4xl">{{ item.item_name|upper }}</p>
             <p class="text-green-500 font-bold text-2xl">Price: ${{ item.item_price }}</p>
             <p>{{ item.item_description }}</p>
             {% if item.creator == request.user %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 {% load cache %}
 {% block content %}
     <body>
@@ -7,38 +8,41 @@
                 {% comment %} fragment caching {% endcomment %}
                 {% for item in page_object %}
                     {# Fragment caching does not add HTTP cache headers. #}
-                    {% cache 900 item item.id %}
-                        {% comment %} Use temporarily to test the cache: {% endcomment %}
-                        {% comment %} <p>Cache created at: {% now "H:i:s" %}</p> {% endcomment %}
-                        <li class="m-10 flex w-1/2 mx-auto">
-                            <div>
-                                <img class="h-32 rounded-lg"
-                                     src="{{ item.item_image }}"
-                                     alt="{{ item.item_name }}">
-                            </div>
-                            <div class="mx-16">
-                                <p class="font-bold">{{ item.item_name }}</p>
-                                <p class="text-green-500 font-bold">Price: ${{ item.item_price }}</p>
-                                <p>Description: {{ item.item_description }}</p>
-                                <a href="{% url "base:detail" item.id %}">
-                                    <div class="bg-red-400 text-white font-bold px-4 py-2 rounded-md mt-2 text-center">View Details</div>
-                                </a>
-                            </div>
-                        </li>
-                    {% endcache %}
-                {% endfor %}
-            </ul>
-        </div>
-    </body>
-    <div class="flex items-center justify-center space-x-4 py-4">
-        {% if page_object.has_previous %}
-            <a class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
-               href="?page={{ page_object.previous_page_number }}">Previous</a>
-        {% endif %}
-        <span>Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}</span>
-        {% if page_object.has_next %}
-            <a class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
-               href="?page={{ page_object.next_page_number }}">Next</a>
-        {% endif %}
-    </div>
+                    {% comment %} {% cache 900 item item.id %} {% endcomment %}
+                    {% comment %} Use temporarily to test the cache: {% endcomment %}
+                    {% comment %} <p>Cache created at: {% now "H:i:s" %}</p> {% endcomment %}
+                    <li class="m-10 flex w-1/2 mx-auto">
+                        <div>
+                            <img class="h-32 rounded-lg"
+                                 src="{{ item.item_image }}"
+                                 alt="{{ item.item_name }}">
+                        </div>
+                        <div class="mx-16">
+                            <p class="font-bold">{{ item.item_name }}</p>
+                            <p class="text-green-600 font-bold">{{ item.item_price|floatformat:2|currency }}</p>
+                            <p class="text-green-500 font-bold">{{ item.item_price|discount:10 }}</p>
+                            {% comment %} template filter example {% endcomment %}
+                            <p>Description: {{ item.item_description|lower|truncatechars:20 }}</p>
+                            <p>{{ item.created_at|date:"d M Y H:i" }}</p>
+                            <a href="{% url "base:detail" item.id %}">
+                                <div class="bg-red-400 text-white font-bold px-4 py-2 rounded-md mt-2 text-center">View Details</div>
+                            </a>
+                        </div>
+                    </li>
+                    {% comment %} {% endcache %} {% endcomment %}
+{% endfor %}
+</ul>
+</div>
+</body>
+<div class="flex items-center justify-center space-x-4 py-4">
+    {% if page_object.has_previous %}
+        <a class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
+           href="?page={{ page_object.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}</span>
+    {% if page_object.has_next %}
+        <a class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
+           href="?page={{ page_object.next_page_number }}">Next</a>
+    {% endif %}
+</div>
 {% endblock content %}
