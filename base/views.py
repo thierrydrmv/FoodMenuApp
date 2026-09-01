@@ -9,7 +9,9 @@ from django.utils import timezone
 # from django.views.decorators.cache import cache_page
 # from django.views.decorators.vary import vary_on_headers
 # from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import UpdateView
+
+from base.forms import ItemForm
 
 # Create your views here.
 from .models import Item
@@ -59,26 +61,27 @@ def detail(request, pk):
 #     login_url = "users/login"
 
 
-# @login_required
-# def createItem(request):
-#     form = ItemForm(request.POST or None)
-#     if request.method == "POST" and form.is_valid():
-#         form.save()
-#         return redirect("base:home")
-#     context = {"form": form}
-#     return render(request, "base/item_form.html", context)
+@login_required
+def createItem(request):
+    form = ItemForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("base:home")
+
+    context = {"form": form}
+    return render(request, "base/item_form.html", context)
 
 
 # have to pass the get_absolute url in the model
-class ItemCreateView(LoginRequiredMixin, CreateView):
-    model = Item
-    fields = ("item_name", "item_description", "item_price", "item_image")
-    template_name = "base/item_form.html"
-    login_url = "users/login"
+# class ItemCreateView(LoginRequiredMixin, CreateView):
+#     model = Item
+#     fields = ("item_name", "item_description", "item_price", "item_image")
+#     template_name = "base/item_form.html"
+#     login_url = "users/login"
 
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.instance.creator = self.request.user
+#         return super().form_valid(form)
 
 
 # @login_required
