@@ -10,7 +10,7 @@ from django.utils import timezone
 # from django.views.decorators.vary import vary_on_headers
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
-from rest_framework import generics
+from rest_framework import viewsets
 
 from base.forms import ItemForm
 
@@ -20,17 +20,25 @@ from .serializers import ItemSerializer
 
 logger = logging.getLogger(__name__)
 
+# ----------------------------- CRUD Using Model ViewSet ---------------------------
+
+
+class ItemViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+
 # ----------------------------- CRUD Using generic views ---------------------------
 
 
-class ItemListCreateAPI(generics.ListCreateAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+# class ItemListCreateAPI(generics.ListCreateAPIView):
+#     queryset = Item.objects.all()
+#     serializer_class = ItemSerializer
 
 
-class ItemRetrieveUpdateDestroyAPI(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+# class ItemRetrieveUpdateDestroyAPI(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Item.objects.all()
+#     serializer_class = ItemSerializer
 
 
 # ----------------------------- CRUD Using class-based views ---------------------------

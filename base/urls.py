@@ -1,16 +1,21 @@
-from django.urls import path
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
 # from django.views.decorators.cache import cache_page  # url level
 from . import views
+
+router = DefaultRouter()
+router.register(r"items", views.ItemViewSet, basename="item")
 
 # Create namespace, when indexing in .html files add base:{name}
 app_name = "base"
 urlpatterns = [
     # URL API Patterns
+    path("api/", include(router.urls)),
     # path("api/items", views.item_list_create_api),
-    path("api/items", views.ItemListCreateAPI.as_view()),
+    # path("api/items", views.ItemListCreateAPI.as_view()),
     # path("api/items/<int:pk>", views.item_detail_api),
-    path("api/items/<int:pk>", views.ItemRetrieveUpdateDestroyAPI.as_view()),
+    # path("api/items/<int:pk>", views.ItemRetrieveUpdateDestroyAPI.as_view()),
     # path("", views.HomeClassView.as_view(), name="home"),
     # path("", cache_page(60 * 15)(views.home), name="home"),
     path("", views.home, name="home"),
