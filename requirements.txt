@@ -10,6 +10,7 @@ Django==6.1
 django-browser-reload==1.21.0
 django-tailwind==4.5.0
 djangorestframework==3.18.0
+djangorestframework_simplejwt==5.5.1
 djlint==1.44.2
 dotenv==0.9.9
 EditorConfig==0.17.1
@@ -26,6 +27,7 @@ pillow==12.3.0
 psycopg==3.3.4
 psycopg-binary==3.3.4
 Pygments==2.21.0
+PyJWT==2.13.0
 pytailwindcss==0.3.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.3

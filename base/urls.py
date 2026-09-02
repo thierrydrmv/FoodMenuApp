@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # from django.views.decorators.cache import cache_page  # url level
 from . import views
@@ -11,6 +12,8 @@ router.register(r"items", views.ItemViewSet, basename="item")
 app_name = "base"
 urlpatterns = [
     # URL API Patterns
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh", TokenRefreshView.as_view(), name="token_obtain"),
     path("api/", include(router.urls)),
     # path("api/items", views.item_list_create_api),
     # path("api/items", views.ItemListCreateAPI.as_view()),
