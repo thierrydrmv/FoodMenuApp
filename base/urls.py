@@ -6,6 +6,8 @@ from . import views
 # Create namespace, when indexing in .html files add base:{name}
 app_name = "base"
 urlpatterns = [
+    # URL API Patterns
+    path("items-api", views.item_list_api, name="item-list-api"),
     # path("", views.HomeClassView.as_view(), name="home"),
     # path("", cache_page(60 * 15)(views.home), name="home"),
     path("", views.home, name="home"),

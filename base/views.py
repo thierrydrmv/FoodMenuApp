@@ -10,13 +10,23 @@ from django.utils import timezone
 # from django.views.decorators.vary import vary_on_headers
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from base.forms import ItemForm
 
 # Create your views here.
 from .models import Item
+from .serializers import ItemSerializer
 
 logger = logging.getLogger(__name__)
+
+
+@api_view(["GET"])
+def item_list_api(request):
+    items = Item.objects.all()
+    serializer = ItemSerializer(items, many=True)
+    return Response(serializer.data)
 
 
 @login_required
