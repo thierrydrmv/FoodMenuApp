@@ -7,7 +7,8 @@ from . import views
 app_name = "base"
 urlpatterns = [
     # URL API Patterns
-    path("items-api", views.item_list_api, name="item-list-api"),
+    path("api/items", views.item_list_create_api),
+    path("api/items/<int:pk>", views.item_detail_api),
     # path("", views.HomeClassView.as_view(), name="home"),
     # path("", cache_page(60 * 15)(views.home), name="home"),
     path("", views.home, name="home"),

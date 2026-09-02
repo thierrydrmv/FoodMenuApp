@@ -22,11 +22,36 @@ from .serializers import ItemSerializer
 logger = logging.getLogger(__name__)
 
 
-@api_view(["GET"])
-def item_list_api(request):
-    items = Item.objects.all()
-    serializer = ItemSerializer(items, many=True)
-    return Response(serializer.data)
+# ----------------------------- API ---------------------------
+@api_view(["GET", "POST"])
+def item_list_create_api(request):
+    if request.method == "GET":
+        items = Item.objects.all()
+        serializer = ItemSerializer(items, many=True)
+        return Response(serializer.data)
+
+    serializer = ItemSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data, status=201)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def item_detail_api(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    if request.method == "GET":
+        serializer = ItemSerializer(item)
+        return Response(serializer.data)
+    if request.method == "PUT":
+        serializer = ItemSerializer(item, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    item.delete()
+    return Response({"message": f"Item {item.item_name} deleted.", "status": 204})
+
+
+# ----------------------------- APP ---------------------------
 
 
 @login_required
