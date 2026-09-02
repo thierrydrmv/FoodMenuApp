@@ -10,8 +10,7 @@ from django.utils import timezone
 # from django.views.decorators.vary import vary_on_headers
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import generics
 
 from base.forms import ItemForm
 
@@ -21,21 +20,67 @@ from .serializers import ItemSerializer
 
 logger = logging.getLogger(__name__)
 
+# ----------------------------- CRUD Using generic views ---------------------------
 
-# ----------------------------- API ---------------------------
+
+class ItemListCreateAPI(generics.ListCreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
 
 
-class ItemListCreateAPIView(APIView):
-    def get(self, request):
-        items = Item.objects.all()
-        serializer = ItemSerializer(items, many=True)
-        return Response(serializer.data)
+class ItemRetrieveUpdateDestroyAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
 
-    def post(self, request):
-        serializer = ItemSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response(serializer.data)
 
+# ----------------------------- CRUD Using class-based views ---------------------------
+
+
+# class ItemListCreateAPIView(APIView):
+#     def get(self, request):
+#         items = Item.objects.all()
+#         serializer = ItemSerializer(items, many=True)
+#         return Response(serializer.data)
+
+#     def post(self, request):
+#         serializer = ItemSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data)
+
+
+# class ItemDetailAPI(APIView):
+#     def get_object(self, pk):
+#         try:
+#             return Item.objects.get(pk=pk)
+#         except Item.DoesNotExist:
+#             return None
+
+#     def get(self, request, pk):
+#         item = self.get_object(pk)
+#         if not item:
+#             return Response({"Error": "Item not found."})
+#         serializer = ItemSerializer(item)
+#         return Response(serializer.data)
+
+#     def put(self, request, pk):
+#         item = self.get_object(pk)
+#         if not item:
+#             return Response({"Error": "Item not found."})
+#         serializer = ItemSerializer(item, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data)
+
+#     def delete(self, request, pk):
+#         item = self.get_object(pk)
+#         if not item:
+#             return Response({"Error": "Item not found."})
+#         item.delete()
+#         return Response({"message": f"Item {item.item_name} deleted.", "status": 204})
+
+
+# ----------------------------- CRUD Using function-based views ---------------------------
 
 # @api_view(["GET", "POST"])
 # def item_list_create_api(request):
@@ -48,38 +93,6 @@ class ItemListCreateAPIView(APIView):
 #     serializer.is_valid(raise_exception=True)
 #     serializer.save()
 #     return Response(serializer.data, status=201)
-
-
-class ItemDetailAPI(APIView):
-    def get_object(self, pk):
-        try:
-            return Item.objects.get(pk=pk)
-        except Item.DoesNotExist:
-            return None
-
-    def get(self, request, pk):
-        item = self.get_object(pk)
-        if not item:
-            return Response({"Error": "Item not found."})
-        serializer = ItemSerializer(item)
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        item = self.get_object(pk)
-        if not item:
-            return Response({"Error": "Item not found."})
-        serializer = ItemSerializer(item, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-
-    def delete(self, request, pk):
-        item = self.get_object(pk)
-        if not item:
-            return Response({"Error": "Item not found."})
-        item.delete()
-        return Response({"message": f"Item {item.item_name} deleted.", "status": 204})
-
 
 # @api_view(["GET", "PUT", "DELETE"])
 # def item_detail_api(request, pk):

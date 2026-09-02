@@ -8,9 +8,9 @@ app_name = "base"
 urlpatterns = [
     # URL API Patterns
     # path("api/items", views.item_list_create_api),
-    path("api/items", views.ItemListCreateAPIView.as_view()),
+    path("api/items", views.ItemListCreateAPI.as_view()),
     # path("api/items/<int:pk>", views.item_detail_api),
-    path("api/items/<int:pk>", views.ItemDetailAPI.as_view()),
+    path("api/items/<int:pk>", views.ItemRetrieveUpdateDestroyAPI.as_view()),
     # path("", views.HomeClassView.as_view(), name="home"),
     # path("", cache_page(60 * 15)(views.home), name="home"),
     path("", views.home, name="home"),
