@@ -11,6 +11,7 @@ from django.utils import timezone
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from base.forms import ItemForm
 
@@ -26,6 +27,7 @@ logger = logging.getLogger(__name__)
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
 # ----------------------------- CRUD Using generic views ---------------------------
