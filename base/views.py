@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.views.generic.edit import UpdateView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from base.forms import ItemForm
@@ -34,9 +34,10 @@ class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsOwnerOrReadOnly,)
-    filter_backends = (DjangoFilterBackend, OrderingFilter)
-    filterset_fields = ("item_name", "item_price")
-    ordering_fields = ("item_name", "item_price")
+    filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
+    # filterset_fields = ("item_name", "item_price")
+    # ordering_fields = ("item_name", "item_price")
+    search_fields = ("item_name", "item_price")
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
