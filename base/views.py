@@ -19,11 +19,11 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from base.forms import ItemForm
 
 # Create your views here.
-from .models import Item
+from .models import Item, Order
 
 # from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
-from .serializers import ItemSerializer
+from .serializers import ItemSerializer, OrderSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +43,11 @@ class ItemViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
 
 # ----------------------------- CRUD Using generic views ---------------------------

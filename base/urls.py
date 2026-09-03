@@ -7,6 +7,7 @@ from . import views
 
 router = DefaultRouter()
 router.register(r"items", views.ItemViewSet, basename="item")
+router.register(r"orders", views.OrderViewSet, basename="order")
 
 # Create namespace, when indexing in .html files add base:{name}
 app_name = "base"

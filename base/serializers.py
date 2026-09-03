@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from .models import Item
+from .models import Item, Order
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -33,3 +33,12 @@ class ItemSerializer(serializers.ModelSerializer):
         if attrs["item_name"] == attrs["item_description"]:
             raise serializers.ValidationError("Name and Description must be different.")
         return attrs
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    items = ItemSerializer(many=True, read_only=True)
+    user = serializers.StringRelatedField()
+
+    class Meta:
+        model = Order
+        fields = ("id", "user", "created_at", "items")
