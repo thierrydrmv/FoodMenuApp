@@ -39,3 +39,6 @@ media/
 
 # Ruff
 .ruff_cache/
+
+# Images
+pictures/item_images
