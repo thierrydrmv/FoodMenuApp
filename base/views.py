@@ -13,6 +13,9 @@ from django.views.generic.edit import UpdateView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
+
+# from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -20,8 +23,6 @@ from base.forms import ItemForm
 
 # Create your views here.
 from .models import Item, Order
-
-# from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from .serializers import ItemSerializer, OrderSerializer
 
@@ -46,8 +47,17 @@ class ItemViewSet(viewsets.ModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
+    queryset = Order.objects.none()
     serializer_class = OrderSerializer
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    throttle_classes = (AnonRateThrottle, UserRateThrottle)
+
+    def get_queryset(self):  # pyright: ignore[reportIncompatibleMethodOverride]
+        return Order.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 # ----------------------------- CRUD Using generic views ---------------------------
