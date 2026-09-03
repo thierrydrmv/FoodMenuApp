@@ -33,6 +33,9 @@ class ItemViewSet(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsOwnerOrReadOnly,)
 
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
+
 
 # ----------------------------- CRUD Using generic views ---------------------------
 
