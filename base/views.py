@@ -11,13 +11,15 @@ from django.utils import timezone
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from base.forms import ItemForm
 
 # Create your views here.
 from .models import Item
+
+# from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsOwnerOrReadOnly
 from .serializers import ItemSerializer
 
 logger = logging.getLogger(__name__)
@@ -29,7 +31,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     authentication_classes = (JWTAuthentication,)
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
 # ----------------------------- CRUD Using generic views ---------------------------
